@@ -1,0 +1,8 @@
+X(version, Y(uint16_t, version), 0x00)
+X(step, Y(uint16_t, frames), 0x02)
+X(reset, Y(uint8_t, reload), 0x04)
+X(input, Y(uint8_t, player) Y(int8_t, button) Y(int8_t, value), 0x06)
+X(video, CHAR(format, 4), 0x08)
+X(audio, Y(uint32_t, sample_count), 0x0A)
+X(load_file, CHAR(file_type, 1024) CHAR(file_path, 1024), 0x0C)
+X(error, Y(uint8_t, this_packet_is_empty_do_not_use_this_struct), 0x0E)

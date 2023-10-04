@@ -1,0 +1,8 @@
+X(version_ack, Y(hc_response_e, response), 0x80)
+X(step_ack, Y(hc_response_e, response), 0x82)
+X(reset_ack, Y(hc_response_e, response), 0x84)
+X(input_ack, Y(hc_response_e, response), 0x86)
+X_UNKNOWN_BODY(video_ack, 0x88)
+X_UNKNOWN_BODY(audio_ack, 0x8A)
+X(load_file_ack, Y(hc_response_e, response), 0x8C)
+X(error_ack, CHAR(message, 1024), 0x8E)
