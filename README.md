@@ -35,3 +35,96 @@ Unknown packet types by default will be ignored by the server. Officially suppor
 guaranteed to never have the LSB set, in case you want to add your own.
 
 Packets are always tightly packed.
+
+### Client packets
+
+#### version
+
+**Description:**    
+Check whether the client and server version match
+
+**Arguments:**    
+`uint16_t version`: HC_PROTOCOL_VERSION macro
+
+**Response:**    
+version_ack
+
+#### step
+
+**Description:**    
+Step the emulator
+
+**Arguments:**    
+`uint16_t frames`: amount of frames to step
+
+**Response:**    
+step_ack
+
+#### reset
+
+**Description:**    
+Reset the emulator
+
+**Arguments:**    
+none
+
+**Response:**    
+reset_ack
+
+#### input
+
+**Description:**    
+Send input to the emulator
+
+**Arguments:**    
+`uint8_t player`    
+`uint8_t button`: see hc_input_e enum    
+`int8_t value`: the button value
+
+**Response:**    
+input_ack
+
+#### video
+
+**Description:**    
+Request the frame as an image from the emulator
+
+**Arguments:**    
+`char format[4]`: null terminated string of the image format between raw, png, bmp, jpg
+
+**Response:**    
+video_ack
+
+#### audio
+
+**Description:**    
+Request stereo audio samples from the emulator as signed shorts
+
+**Arguments:**    
+`uint32_t sample_count`
+
+**Response:**    
+audio_ack
+
+#### load_file
+
+**Description:**    
+Load a file (local to the server) to the emulator
+
+**Arguments:**    
+`char file_type[64]`: null terminated type of file to load    
+`char file_path[1024]`: null terminated local to server path to the file
+
+**Response:**    
+load_file_ack
+
+#### error
+
+**Description:**    
+Get latest error message
+
+**Arguments:**    
+none
+
+**Response:**    
+error_ack

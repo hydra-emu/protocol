@@ -4,8 +4,15 @@
 // and make additions to the protocol easier
 // Viewing a preprocessed version of this file is recommended
 // You can create one using gcc -E packet.h
+#pragma once
 
 #include <stdint.h>
+#include <assert.h>
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif
 
 #define HC_PROTOCOL_VERSION_MAJOR 1
 #define HC_PROTOCOL_VERSION_MINOR 0
@@ -19,9 +26,9 @@ typedef enum
 } hc_client_packet_type_e;
 
 #define X(name, args, type) + 1
-inline const int HC_CLIENT_PACKETS_SIZE = 0
-#include "client.def"
-;
+#define HC_CLIENT_PACKETS_SIZE (0 \
+#include "client.def" \
+)
 #undef X
 
 typedef enum
@@ -35,9 +42,9 @@ typedef enum
 
 #define X(name, args, type) + 1
 #define X_UNKNOWN_BODY(name, type) + 1
-inline const int HC_SERVER_PACKETS_SIZE = 0
-#include "server.def"
-;
+#define HC_SERVER_PACKETS_SIZE (0 \
+#include "server.def" \
+)
 #undef X
 #undef X_UNKNOWN_BODY
 
@@ -53,10 +60,10 @@ typedef enum
 } hc_response_e;
 
 #define X(name, type) + 1
-inline const int HC_RESPONSES_SIZE = 0 X_RESPONSES;
+#define HC_RESPONSES_SIZE (0 X_RESPONSES)
 #undef X
 
-void* malloc_packet(uint8_t type, void* body, uint32_t size);
+void* malloc_packet(uint8_t type, void* body, uint32_t body_size, uint32_t* packet_size);
 void free_packet(void* packet);
 
 #pragma pack(push, 1)
@@ -92,3 +99,7 @@ void free_packet(void* packet);
 
 #undef X_HC_CLIENT_PACKETS
 #undef X_HC_SERVER_PACKETS
+
+#ifdef __cplusplus
+}
+#endif
