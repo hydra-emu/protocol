@@ -63,9 +63,6 @@ typedef enum
 #define HC_RESPONSES_SIZE (0 X_RESPONSES)
 #undef X
 
-void* malloc_packet(uint8_t type, void* body, uint32_t body_size, uint32_t* packet_size);
-void free_packet(void* packet);
-
 #pragma pack(push, 1)
 #define X(name, args, type) typedef struct { args } hc_client_##name##_t;
 #define Y(type, name) type name;
