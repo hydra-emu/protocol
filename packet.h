@@ -80,13 +80,13 @@ typedef enum
 
 // Size asserts
 #define X(name, args, type) \
-    static_assert(sizeof(hc_client_##name##_t) == 0 args, "Invalid size for hc_client_" #name "_t");
+    static_assert(sizeof(hc_client_##name##_t) == 0 args, "Invalid size for hc_client_" #name "_t"); enum { HC_PACKET_SIZE_##name = 0 args, };
 #define Y(type, name) + sizeof(type)
 #define CHAR(name, size) + size
 #include "client.def"
 #undef X
 #define X(name, args, type) \
-    static_assert(sizeof(hc_server_##name##_t) == 0 args, "Invalid size for hc_server_" #name "_t");
+    static_assert(sizeof(hc_server_##name##_t) == 0 args, "Invalid size for hc_server_" #name "_t"); enum { HC_PACKET_SIZE_##name = 0 args, };
 #define X_UNKNOWN_BODY(name, type)
 #include "server.def"
 #undef X
